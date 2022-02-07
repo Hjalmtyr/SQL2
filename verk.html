@@ -1,54 +1,55 @@
 <html>
 
 <head>
-<title> SQL fyrirspurnarmáliğ, heimaæfingar </title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title> SQL fyrirspurnarmÃ¡liÃ°, heimaÃ¦fingar </title>
 </head>
 
 <body>
 
 <img src = "endurmennt.jpg" align=left hspace=20><p>
 <h1 align="center">
-SQL fyrirspurnarmáliğ
+SQL fyrirspurnarmÃ¡liÃ°
 </h1>
 
 <h1 align="center">
-Heimaæfingar
+HeimaÃ¦fingar
 </h1>
 
 <br><br>
 <hr>
 
-Gagnasafniğ <a href="movies.db">movies.db</a> er skilgreint í skipanaskránni <a href="movies.sql">movies.sql</a>.  Şar er
-skilgreint gagnasafn og gögn fyrir gamla útgáfu af <a href="http://www.imdb.com/interfaces">The Internet Movie Database (IMDB)</a>.
-Gagnasafniğ inniheldur şrjár töflur:
+GagnasafniÃ° <a href="movies.db">movies.db</a> er skilgreint Ã­ skipanaskrÃ¡nni <a href="movies.sql">movies.sql</a>.  Ãar er
+skilgreint gagnasafn og gÃ¶gn fyrir gamla ÃºtgÃ¡fu af <a href="http://www.imdb.com/interfaces">The Internet Movie Database (IMDB)</a>.
+GagnasafniÃ° inniheldur Ã¾rjÃ¡r tÃ¶flur:
 <ul>
   <li> <tt>actor( id, name )</tt>
   <li> <tt>movie( id, title, year, score, votes, director )</tt>
   <li> <tt>casting( movieid, actorid, ord )</tt>
 </ul>
-Taflan <tt>actor</tt> inniheldur nöfn leikara og leikstjóra (e. directors).  Taflan <tt>movie</tt> inniheldur
-upplısingar um kvikmyndir, m.a. útgáfuár (<tt>year</tt>), einkunn (<tt>score</tt>), fjölda atkvæğa á bakviğ
-einkunnina (<tt>votes</tt>) og auğkenni leikstjóra í <tt>actor</tt>-töflunni.  Taflan <tt>casting</tt> inniheldur
-auğkenni leikara og kvikmynda ásamt röğ leikarans í myndinni (<tt>ord</tt>), ş.e. hversu mikilvægur leikarinn
-er í myndinni (ağalleikarinn er meğ <tt>ord</tt> = 1, o.s.frv.).
+Taflan <tt>actor</tt> inniheldur nÃ¶fn leikara og leikstjÃ³ra (e. directors).  Taflan <tt>movie</tt> inniheldur
+upplÃ½singar um kvikmyndir, m.a. ÃºtgÃ¡fuÃ¡r (<tt>year</tt>), einkunn (<tt>score</tt>), fjÃ¶lda atkvÃ¦Ã°a Ã¡ bakviÃ°
+einkunnina (<tt>votes</tt>) og auÃ°kenni leikstjÃ³ra Ã­ <tt>actor</tt>-tÃ¶flunni.  Taflan <tt>casting</tt> inniheldur
+auÃ°kenni leikara og kvikmynda Ã¡samt rÃ¶Ã° leikarans Ã­ myndinni (<tt>ord</tt>), Ã¾.e. hversu mikilvÃ¦gur leikarinn
+er Ã­ myndinni (aÃ°alleikarinn er meÃ° <tt>ord</tt> = 1, o.s.frv.).
 <p>
 
-Şiğ eigiğ ağ útfæra eftirfarandi fyrirspurnir í SQL og keyra şær á gagnasafninu.  Şiğ getiğ sent mér lausnir ykkar
-(bara fyrirspurnirnar sjálfar) á <a href="mailto:hh@hi.is">hh@hi.is</a> fyrir tímann á morgun.
+ÃiÃ° eigiÃ° aÃ° ÃºtfÃ¦ra eftirfarandi fyrirspurnir Ã­ SQL og keyra Ã¾Ã¦r Ã¡ gagnasafninu.  ÃiÃ° getiÃ° sent mÃ©r lausnir ykkar
+(bara fyrirspurnirnar sjÃ¡lfar) Ã¡ <a href="mailto:hh@hi.is">hh@hi.is</a> fyrir tÃ­mann Ã¡ morgun.
 <ol>
 
-  <li> Sıniğ nöfn şeirra 10 kvikmynda sem hafa lægstu einkunnirnar.
+  <li> SÃ½niÃ° nÃ¶fn Ã¾eirra 10 kvikmynda sem hafa lÃ¦gstu einkunnirnar.
 
-  <li> Sıniğ meğaleinkunn kvikmynda eftir ári.
+  <li> SÃ½niÃ° meÃ°aleinkunn kvikmynda eftir Ã¡ri.
 
-  <li> Sıniğ meğaleinkunn kvikmynda hvers leikara.  Sıniğ nafn leikara og meğaleinkunnina í lækkandi röğ eftir einkunn.
+  <li> SÃ½niÃ° meÃ°aleinkunn kvikmynda hvers leikara.  SÃ½niÃ° nafn leikara og meÃ°aleinkunnina Ã­ lÃ¦kkandi rÃ¶Ã° eftir einkunn.
 
-  <li> Sıniğ nöfn şeirra leikara sem léku í kvikmyndinni "Predator" í röğ eftir mikilvægi şeirra (ş.e. eftir <tt>ord</tt>).
+  <li> SÃ½niÃ° nÃ¶fn Ã¾eirra leikara sem lÃ©ku Ã­ kvikmyndinni "Predator" Ã­ rÃ¶Ã° eftir mikilvÃ¦gi Ã¾eirra (Ã¾.e. eftir <tt>ord</tt>).
 
-  <li> Fyrir hvern leikara sıniğ fjölda kvikmynda sem hann hefur leikiğ í.  Sıniğ listann í lækkandi röğ eftir fjölda og
-       sıniğ ağeins 10 efstu.
+  <li> Fyrir hvern leikara sÃ½niÃ° fjÃ¶lda kvikmynda sem hann hefur leikiÃ° Ã­.  SÃ½niÃ° listann Ã­ lÃ¦kkandi rÃ¶Ã° eftir fjÃ¶lda og
+       sÃ½niÃ° aÃ°eins 10 efstu.
 
-  <li> Sıniğ nöfn allra şeirra leikara sem Francis Ford Coppola hefur leikstırt í kvikmynd ásamt nafni kvikmyndarinnar
+  <li> SÃ½niÃ° nÃ¶fn allra Ã¾eirra leikara sem Francis Ford Coppola hefur leikstÃ½rt Ã­ kvikmynd Ã¡samt nafni kvikmyndarinnar
        fyrir hvern leikara.
 
 </ol>
@@ -56,7 +57,7 @@ er í myndinni (ağalleikarinn er meğ <tt>ord</tt> = 1, o.s.frv.).
 
 <hr>
 <p>
-<a href="mailto:hh (hja) hi.is">hh (hja) hi.is</a>, 14. febrúar, 2022.
+<a href="mailto:hh (hja) hi.is">hh (hja) hi.is</a>, 14. febrÃºar, 2022.
 </body>
 
 </html>

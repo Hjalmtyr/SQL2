@@ -1,38 +1,39 @@
 <html>
 
 <head>
-<title> SQL fyrirspurnarmáliğ, lausnir á tímaæfingum 1</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title> SQL fyrirspurnarmÃ¡liÃ°, lausnir Ã¡ tÃ­maÃ¦fingum 1</title>
 </head>
 
 <body>
 
 <img src = "endurmennt.jpg" align=left hspace=20><p>
 <h1 align="center">
-SQL fyrirspurnarmáliğ
+SQL fyrirspurnarmÃ¡liÃ°
 </h1>
 
 <h1 align="center">
-Lausnir á tímaæfingum 14. febrúar
+Lausnir Ã¡ tÃ­maÃ¦fingum 14. febrÃºar
 </h1>
 
 <br><br>
 
 <hr>
-<b>SQL upprifjunaræfingar:</b>
+<b>SQL upprifjunarÃ¦fingar:</b>
 <ul>
-  <li> Sıniğ félagsmenn í röğ eftir póstnúmeri
+  <li> SÃ½niÃ° fÃ©lagsmenn Ã­ rÃ¶Ã° eftir pÃ³stnÃºmeri
     <pre>
         SELECT * FROM felagar
             ORDER BY postnr;
 
     </pre>
-  <li> Sıniğ şá bústaği sem eru stærri en 60m<sup>2</sup> eğa hafa 6 rúm eğa fleiri
+  <li> SÃ½niÃ° Ã¾Ã¡ bÃºstaÃ°i sem eru stÃ¦rri en 60m<sup>2</sup> eÃ°a hafa 6 rÃºm eÃ°a fleiri
    <pre>
         SELECT * FROM sumarhus
             WHERE fermetrar &gt; 60 OR fj_ruma >= 6;
 
    </pre>
-  <li> Sıniğ meğalfjölda stiga eftir inngönguári félaga
+  <li> SÃ½niÃ° meÃ°alfjÃ¶lda stiga eftir inngÃ¶nguÃ¡ri fÃ©laga
    <pre>
         SELECT inng_ar, avg(stig) FROM felagar
             GROUP BY inng_ar;
@@ -41,36 +42,36 @@ Lausnir á tímaæfingum 14. febrúar
 </ul>
 
 <hr>
-<b>Æfingar um tengingu (<i>join</i>) í SQL:</b>
+<b>Ã†fingar um tengingu (<i>join</i>) Ã­ SQL:</b>
 <ul>
-  <li> Sıniğ alla şá sem hafa fengiğ leigğan bústağ 1001
+  <li> SÃ½niÃ° alla Ã¾Ã¡ sem hafa fengiÃ° leigÃ°an bÃºstaÃ° 1001
    <pre>
         SELECT nafn, dags
             FROM felagar NATURAL JOIN leigur
             WHERE husnr = 1001;
    </pre>
-   eğa
+   eÃ°a
    <pre>
         SELECT nafn, dags
             FROM felagar JOIN leigur
                 ON felagar.fnr = leigur.fnr
             WHERE husnr = 1001;
    </pre>
-   eğa (eldri útgáfa)
+   eÃ°a (eldri ÃºtgÃ¡fa)
    <pre>
         SELECT nafn, dags
             FROM felagar, leigur
             WHERE felagar.fnr = leigur.fnr AND husnr = 1001;
 
    </pre>
-  <li> Sıniğ alla şá sem hafa fengiğ leigğan bústağinn "Laugarvatn 2"
+  <li> SÃ½niÃ° alla Ã¾Ã¡ sem hafa fengiÃ° leigÃ°an bÃºstaÃ°inn "Laugarvatn 2"
    <pre>
         SELECT fnr, nafn
             FROM felagar NATURAL JOIN leigur NATURAL JOIN sumarhus
             WHERE stadur = 'Laugarvatn 2';
 
    </pre>
-  <li> Sıniğ nafn og fjölda útleiga fyrir hvern bústağ
+  <li> SÃ½niÃ° nafn og fjÃ¶lda Ãºtleiga fyrir hvern bÃºstaÃ°
    <pre>
         SELECT stadur, count(*)
             FROM leigur NATURAL JOIN sumarhus
@@ -78,7 +79,7 @@ Lausnir á tímaæfingum 14. febrúar
 
    </pre>
    <ul>
-     <li>Viğbót:  ... á árinu 2021
+     <li>ViÃ°bÃ³t:  ... Ã¡ Ã¡rinu 2021
    <pre>
         SELECT stadur, count(*)
             FROM leigur NATURAL JOIN sumarhus
@@ -87,7 +88,7 @@ Lausnir á tímaæfingum 14. febrúar
 
    </pre>
    </ul>
-  <li> Fyrir hvern bústağ sıniğ nöfn şeirra félagsmanna sem hafa fengiğ hann leigğan í vikuleigu
+  <li> Fyrir hvern bÃºstaÃ° sÃ½niÃ° nÃ¶fn Ã¾eirra fÃ©lagsmanna sem hafa fengiÃ° hann leigÃ°an Ã­ vikuleigu
    <pre>
         SELECT husnr, nafn, dags
             FROM felagar NATURAL JOIN leigur
@@ -98,29 +99,29 @@ Lausnir á tímaæfingum 14. febrúar
 </ul>
 
 <hr>
-<b>Æfingar um undirfyrirspurnir meğ einni útkomu:</b>
+<b>Ã†fingar um undirfyrirspurnir meÃ° einni Ãºtkomu:</b>
 <ul>
-  <li> Sıniğ nafniğ á sumarhúsinu meğ mestan fjölda rúma
+  <li> SÃ½niÃ° nafniÃ° Ã¡ sumarhÃºsinu meÃ° mestan fjÃ¶lda rÃºma
     <pre>
         SELECT stadur FROM sumarhus
             WHERE fj_ruma = (SELECT max(fj_ruma) FROM sumarhus);
 
     </pre>
-  <li> Sıniğ öll sumarhús sem eru minni en Reykir
+  <li> SÃ½niÃ° Ã¶ll sumarhÃºs sem eru minni en Reykir
    <pre>
         SELECT * FROM sumarhus
             WHERE fermetrar < (SELECT fermetrar FROM sumarhus
                                    WHERE stadur = 'Reykir');
 
    </pre>
-  <li> Sıniğ alla félagsmenn sem búa í öğru póstnúmeri en Bjarni
+  <li> SÃ½niÃ° alla fÃ©lagsmenn sem bÃºa Ã­ Ã¶Ã°ru pÃ³stnÃºmeri en Bjarni
    <pre>
         SELECT * FROM felagar
             WHERE postnr <> (SELECT postnr FROM felagar
                                    WHERE nafn = 'Bjarni');
 
    </pre>
-  <li> Sıniğ şá félagsmenn sem hafa leigt oftar en Erla
+  <li> SÃ½niÃ° Ã¾Ã¡ fÃ©lagsmenn sem hafa leigt oftar en Erla
    <pre>
         SELECT nafn, count(*) FROM felagar NATURAL JOIN leigur
             GROUP BY fnr, nafn
@@ -131,22 +132,22 @@ Lausnir á tímaæfingum 14. febrúar
 </ul>
 
 <hr>
-<b>Æfingar um undirfyrirspurnir meğ útkomu sem er mengi:</b>
+<b>Ã†fingar um undirfyrirspurnir meÃ° Ãºtkomu sem er mengi:</b>
 <ul>
-  <li> Sıniğ şá félagsmenn sem aldrei hafa fengiğ sumarhús á leigu
+  <li> SÃ½niÃ° Ã¾Ã¡ fÃ©lagsmenn sem aldrei hafa fengiÃ° sumarhÃºs Ã¡ leigu
    <pre>
         SELECT * FROM felagar
             WHERE fnr NOT IN (SELECT fnr from leigur);
 
    </pre>
-  <li> Sıniğ şau sumarhús sem hafa veriğ leigğ sjaldnar en tvisvar
+  <li> SÃ½niÃ° Ã¾au sumarhÃºs sem hafa veriÃ° leigÃ° sjaldnar en tvisvar
    <pre>
         SELECT * FROM sumarhus
             WHERE 2 &gt; (SELECT count(*) from leigur
                             WHERE leigur.husnr = sumarhus.husnr);
 
    </pre>
-  <li> Sıniğ şá félagsmenn sem aldrei hafa leigt sér sumarhús meğ 10 rúmum
+  <li> SÃ½niÃ° Ã¾Ã¡ fÃ©lagsmenn sem aldrei hafa leigt sÃ©r sumarhÃºs meÃ° 10 rÃºmum
    <pre>
         SELECT * FROM felagar
             WHERE fnr NOT IN (SELECT fnr FROM sumarhus NATURAL JOIN leigur
@@ -158,7 +159,7 @@ Lausnir á tímaæfingum 14. febrúar
 
 <hr>
 <p>
-<a href="mailto:hh (hja) hi.is">hh (hja) hi.is</a>, 14. febrúar, 2022.
+<a href="mailto:hh (hja) hi.is">hh (hja) hi.is</a>, 14. febrÃºar, 2022.
 </body>
 
 </html>

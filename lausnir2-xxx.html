@@ -1,39 +1,40 @@
 <html>
 
 <head>
-<title> SQL fyrirspurnarmáliğ, lausnir á tímaæfingum 2</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title> SQL fyrirspurnarmÃ¡liÃ°, lausnir Ã¡ tÃ­maÃ¦fingum 2</title>
 </head>
 
 <body>
 
 <img src = "endurmennt.jpg" align=left hspace=20><p>
 <h1 align="center">
-SQL fyrirspurnarmáliğ
+SQL fyrirspurnarmÃ¡liÃ°
 </h1>
 
 <h1 align="center">
-Lausnir á tímaæfingum 17. febrúar
+Lausnir Ã¡ tÃ­maÃ¦fingum 17. febrÃºar
 </h1>
 
 <br><br>
 
 
 <hr>
-<b>Æfingar um ytri tengingar:</b>
+<b>Ã†fingar um ytri tengingar:</b>
 <ul>
-  <li> Sıniğ <u>alla félagsmenn</u> sem búa í Reykjavík og şær leigur sem şeir eiga
+  <li> SÃ½niÃ° <u>alla fÃ©lagsmenn</u> sem bÃºa Ã­ ReykjavÃ­k og Ã¾Ã¦r leigur sem Ã¾eir eiga
    <pre>
         SELECT nafn, husnr, dags FROM felagar NATURAL LEFT JOIN leigur
             WHERE postnr <= '150';
 
    </pre>
-  <li> Sıniğ <u>alla félagsmenn</u> og fjölda daga sem şeir hafa leigt sumarhús
+  <li> SÃ½niÃ° <u>alla fÃ©lagsmenn</u> og fjÃ¶lda daga sem Ã¾eir hafa leigt sumarhÃºs
    <pre>
         SELECT fnr, nafn, sum(fj_daga) FROM felagar NATURAL LEFT JOIN leigur
             GROUP BY fnr, nafn;
 
    </pre>
-  <li> Sıniğ şau sumarhús sem aldrei hafa veriğ leigğ (notiğ ytri tengingu)
+  <li> SÃ½niÃ° Ã¾au sumarhÃºs sem aldrei hafa veriÃ° leigÃ° (notiÃ° ytri tengingu)
    <pre>
         SELECT stadur FROM sumarhus NATURAL LEFT JOIN leigur
             WHERE fnr IS NULL;
@@ -42,9 +43,9 @@ Lausnir á tímaæfingum 17. febrúar
 </ul>
 
 <hr>
-<b>Æfingar um mengjaağgerğir:</b>
+<b>Ã†fingar um mengjaaÃ°gerÃ°ir:</b>
 <ul>
-  <li> Sıniğ félagsnúmer şeirra sem búa í Grafarvogi eğa hafa leigt oftar en einu sinni
+  <li> SÃ½niÃ° fÃ©lagsnÃºmer Ã¾eirra sem bÃºa Ã­ Grafarvogi eÃ°a hafa leigt oftar en einu sinni
    <pre>
         SELECT fnr FROM felagar
             WHERE postnr = '112'
@@ -54,7 +55,7 @@ Lausnir á tímaæfingum 17. febrúar
             HAVING count(*) > 1;
 
    </pre>
-  <li> Sıniğ <b>nöfn</b> şeirra sem búa í Grafarvogi eğa hafa leigt oftar en einu sinni
+  <li> SÃ½niÃ° <b>nÃ¶fn</b> Ã¾eirra sem bÃºa Ã­ Grafarvogi eÃ°a hafa leigt oftar en einu sinni
    <pre>
         SELECT fnr, nafn FROM felagar
             WHERE postnr = '112'
@@ -64,7 +65,7 @@ Lausnir á tímaæfingum 17. febrúar
             HAVING count(*) > 1;
 
    </pre>
-  <li> Sıniğ şá félagsmenn sem hafa leigt bæği hús númer 1001 og 1002
+  <li> SÃ½niÃ° Ã¾Ã¡ fÃ©lagsmenn sem hafa leigt bÃ¦Ã°i hÃºs nÃºmer 1001 og 1002
    <pre>
         SELECT fnr, nafn FROM felagar NATURAL JOIN leigur
             WHERE husnr = 1001
@@ -73,7 +74,7 @@ Lausnir á tímaæfingum 17. febrúar
             WHERE husnr = 1002;
 
    </pre>
-  <li> Sıniğ öll sumarhús sem ekkert voru leigğ áriğ 2020
+  <li> SÃ½niÃ° Ã¶ll sumarhÃºs sem ekkert voru leigÃ° Ã¡riÃ° 2020
    <pre>
         SELECT husnr FROM sumarhus
         EXCEPT
@@ -85,9 +86,9 @@ Lausnir á tímaæfingum 17. febrúar
 
 
 <hr>
-<b>Æfingar um sındartöflur:</b>
+<b>Ã†fingar um sÃ½ndartÃ¶flur:</b>
 <ul>
-  <li> Búiğ til sındartöfluna <tt>allt</tt> og sıniğ nöfn şeirra félagsmanna sem hafa leigt bústağinn "Laugarvatn 1"
+  <li> BÃºiÃ° til sÃ½ndartÃ¶fluna <tt>allt</tt> og sÃ½niÃ° nÃ¶fn Ã¾eirra fÃ©lagsmanna sem hafa leigt bÃºstaÃ°inn "Laugarvatn 1"
    <pre>
         CREATE VIEW allt AS
 	   SELECT * FROM felagar NATURAL JOIN
@@ -98,7 +99,7 @@ Lausnir á tímaæfingum 17. febrúar
 	    WHERE stadur = 'Laugarvatn 1';
 
    </pre>
-  <li> Búiğ til sındartöflu sem hefur ağeins dálkana fnr, nafn og inng_ar og inniheldur ağeins şá sem búa utan Reykjavíkur
+  <li> BÃºiÃ° til sÃ½ndartÃ¶flu sem hefur aÃ°eins dÃ¡lkana fnr, nafn og inng_ar og inniheldur aÃ°eins Ã¾Ã¡ sem bÃºa utan ReykjavÃ­kur
    <pre>
         CREATE VIEW dreifarar AS
             SELECT fnr, nafn, inng_ar FROM felagar
@@ -110,7 +111,7 @@ Lausnir á tímaæfingum 17. febrúar
 
 <hr>
 <p>
-<a href="mailto:hh (hja) hi.is">hh (hja) hi.is</a>, 17. febrúar, 2022.
+<a href="mailto:hh (hja) hi.is">hh (hja) hi.is</a>, 17. febrÃºar, 2022.
 </body>
 
 </html>
