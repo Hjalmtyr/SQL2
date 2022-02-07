@@ -1,0 +1,116 @@
+<html>
+
+<head>
+<title> SQL fyrirspurnarmálið, lausnir á tímaæfingum 2</title>
+</head>
+
+<body>
+
+<img src = "endurmennt.jpg" align=left hspace=20><p>
+<h1 align="center">
+SQL fyrirspurnarmálið
+</h1>
+
+<h1 align="center">
+Lausnir á tímaæfingum 17. febrúar
+</h1>
+
+<br><br>
+
+
+<hr>
+<b>Æfingar um ytri tengingar:</b>
+<ul>
+  <li> Sýnið <u>alla félagsmenn</u> sem búa í Reykjavík og þær leigur sem þeir eiga
+   <pre>
+        SELECT nafn, husnr, dags FROM felagar NATURAL LEFT JOIN leigur
+            WHERE postnr <= '150';
+
+   </pre>
+  <li> Sýnið <u>alla félagsmenn</u> og fjölda daga sem þeir hafa leigt sumarhús
+   <pre>
+        SELECT fnr, nafn, sum(fj_daga) FROM felagar NATURAL LEFT JOIN leigur
+            GROUP BY fnr, nafn;
+
+   </pre>
+  <li> Sýnið þau sumarhús sem aldrei hafa verið leigð (notið ytri tengingu)
+   <pre>
+        SELECT stadur FROM sumarhus NATURAL LEFT JOIN leigur
+            WHERE fnr IS NULL;
+
+   </pre>
+</ul>
+
+<hr>
+<b>Æfingar um mengjaaðgerðir:</b>
+<ul>
+  <li> Sýnið félagsnúmer þeirra sem búa í Grafarvogi eða hafa leigt oftar en einu sinni
+   <pre>
+        SELECT fnr FROM felagar
+            WHERE postnr = '112'
+        UNION
+        SELECT fnr FROM leigur
+            GROUP BY fnr
+            HAVING count(*) > 1;
+
+   </pre>
+  <li> Sýnið <b>nöfn</b> þeirra sem búa í Grafarvogi eða hafa leigt oftar en einu sinni
+   <pre>
+        SELECT fnr, nafn FROM felagar
+            WHERE postnr = '112'
+        UNION
+        SELECT fnr, nafn FROM leigur NATURAL JOIN felagar
+            GROUP BY fnr, nafn
+            HAVING count(*) > 1;
+
+   </pre>
+  <li> Sýnið þá félagsmenn sem hafa leigt bæði hús númer 1001 og 1002
+   <pre>
+        SELECT fnr, nafn FROM felagar NATURAL JOIN leigur
+            WHERE husnr = 1001
+        INTERSECT
+        SELECT fnr, nafn FROM felagar NATURAL JOIN leigur
+            WHERE husnr = 1002;
+
+   </pre>
+  <li> Sýnið öll sumarhús sem ekkert voru leigð árið 2020
+   <pre>
+        SELECT husnr FROM sumarhus
+        EXCEPT
+        SELECT husnr FROM leigur
+            WHERE dags LIKE '2020%';
+
+   </pre>
+</ul>
+
+
+<hr>
+<b>Æfingar um sýndartöflur:</b>
+<ul>
+  <li> Búið til sýndartöfluna <tt>allt</tt> og sýnið nöfn þeirra félagsmanna sem hafa leigt bústaðinn "Laugarvatn 1"
+   <pre>
+        CREATE VIEW allt AS
+	   SELECT * FROM felagar NATURAL JOIN
+	                 leigur NATURAL JOIN
+	                 sumarhus;
+
+	SELECT nafn FROM allt
+	    WHERE stadur = 'Laugarvatn 1';
+
+   </pre>
+  <li> Búið til sýndartöflu sem hefur aðeins dálkana fnr, nafn og inng_ar og inniheldur aðeins þá sem búa utan Reykjavíkur
+   <pre>
+        CREATE VIEW dreifarar AS
+            SELECT fnr, nafn, inng_ar FROM felagar
+                WHERE postnr >= '170';
+
+   </pre>
+</ul>
+
+
+<hr>
+<p>
+<a href="mailto:hh (hja) hi.is">hh (hja) hi.is</a>, 17. febrúar, 2022.
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<html>
+
+<head>
+<title> SQL fyrirspurnarmálið, heimaæfingar </title>
+</head>
+
+<body>
+
+<img src = "endurmennt.jpg" align=left hspace=20><p>
+<h1 align="center">
+SQL fyrirspurnarmálið
+</h1>
+
+<h1 align="center">
+Heimaæfingar
+</h1>
+
+<br><br>
+<hr>
+
+Gagnasafnið <a href="movies.db">movies.db</a> er skilgreint í skipanaskránni <a href="movies.sql">movies.sql</a>.  Þar er
+skilgreint gagnasafn og gögn fyrir gamla útgáfu af <a href="http://www.imdb.com/interfaces">The Internet Movie Database (IMDB)</a>.
+Gagnasafnið inniheldur þrjár töflur:
+<ul>
+  <li> <tt>actor( id, name )</tt>
+  <li> <tt>movie( id, title, year, score, votes, director )</tt>
+  <li> <tt>casting( movieid, actorid, ord )</tt>
+</ul>
+Taflan <tt>actor</tt> inniheldur nöfn leikara og leikstjóra (e. directors).  Taflan <tt>movie</tt> inniheldur
+upplýsingar um kvikmyndir, m.a. útgáfuár (<tt>year</tt>), einkunn (<tt>score</tt>), fjölda atkvæða á bakvið
+einkunnina (<tt>votes</tt>) og auðkenni leikstjóra í <tt>actor</tt>-töflunni.  Taflan <tt>casting</tt> inniheldur
+auðkenni leikara og kvikmynda ásamt röð leikarans í myndinni (<tt>ord</tt>), þ.e. hversu mikilvægur leikarinn
+er í myndinni (aðalleikarinn er með <tt>ord</tt> = 1, o.s.frv.).
+<p>
+
+Þið eigið að útfæra eftirfarandi fyrirspurnir í SQL og keyra þær á gagnasafninu.  Þið getið sent mér lausnir ykkar
+(bara fyrirspurnirnar sjálfar) á <a href="mailto:hh@hi.is">hh@hi.is</a> fyrir tímann á morgun.
+<ol>
+
+  <li> Sýnið nöfn þeirra 10 kvikmynda sem hafa lægstu einkunnirnar.
+
+  <li> Sýnið meðaleinkunn kvikmynda eftir ári.
+
+  <li> Sýnið meðaleinkunn kvikmynda hvers leikara.  Sýnið nafn leikara og meðaleinkunnina í lækkandi röð eftir einkunn.
+
+  <li> Sýnið nöfn þeirra leikara sem léku í kvikmyndinni "Predator" í röð eftir mikilvægi þeirra (þ.e. eftir <tt>ord</tt>).
+
+  <li> Fyrir hvern leikara sýnið fjölda kvikmynda sem hann hefur leikið í.  Sýnið listann í lækkandi röð eftir fjölda og
+       sýnið aðeins 10 efstu.
+
+  <li> Sýnið nöfn allra þeirra leikara sem Francis Ford Coppola hefur leikstýrt í kvikmynd ásamt nafni kvikmyndarinnar
+       fyrir hvern leikara.
+
+</ol>
+
+
+<hr>
+<p>
+<a href="mailto:hh (hja) hi.is">hh (hja) hi.is</a>, 14. febrúar, 2022.
+</body>
+
+</html>

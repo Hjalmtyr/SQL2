@@ -1,0 +1,164 @@
+<html>
+
+<head>
+<title> SQL fyrirspurnarmálið, lausnir á tímaæfingum 1</title>
+</head>
+
+<body>
+
+<img src = "endurmennt.jpg" align=left hspace=20><p>
+<h1 align="center">
+SQL fyrirspurnarmálið
+</h1>
+
+<h1 align="center">
+Lausnir á tímaæfingum 14. febrúar
+</h1>
+
+<br><br>
+
+<hr>
+<b>SQL upprifjunaræfingar:</b>
+<ul>
+  <li> Sýnið félagsmenn í röð eftir póstnúmeri
+    <pre>
+        SELECT * FROM felagar
+            ORDER BY postnr;
+
+    </pre>
+  <li> Sýnið þá bústaði sem eru stærri en 60m<sup>2</sup> eða hafa 6 rúm eða fleiri
+   <pre>
+        SELECT * FROM sumarhus
+            WHERE fermetrar &gt; 60 OR fj_ruma >= 6;
+
+   </pre>
+  <li> Sýnið meðalfjölda stiga eftir inngönguári félaga
+   <pre>
+        SELECT inng_ar, avg(stig) FROM felagar
+            GROUP BY inng_ar;
+
+   </pre>
+</ul>
+
+<hr>
+<b>Æfingar um tengingu (<i>join</i>) í SQL:</b>
+<ul>
+  <li> Sýnið alla þá sem hafa fengið leigðan bústað 1001
+   <pre>
+        SELECT nafn, dags
+            FROM felagar NATURAL JOIN leigur
+            WHERE husnr = 1001;
+   </pre>
+   eða
+   <pre>
+        SELECT nafn, dags
+            FROM felagar JOIN leigur
+                ON felagar.fnr = leigur.fnr
+            WHERE husnr = 1001;
+   </pre>
+   eða (eldri útgáfa)
+   <pre>
+        SELECT nafn, dags
+            FROM felagar, leigur
+            WHERE felagar.fnr = leigur.fnr AND husnr = 1001;
+
+   </pre>
+  <li> Sýnið alla þá sem hafa fengið leigðan bústaðinn "Laugarvatn 2"
+   <pre>
+        SELECT fnr, nafn
+            FROM felagar NATURAL JOIN leigur NATURAL JOIN sumarhus
+            WHERE stadur = 'Laugarvatn 2';
+
+   </pre>
+  <li> Sýnið nafn og fjölda útleiga fyrir hvern bústað
+   <pre>
+        SELECT stadur, count(*)
+            FROM leigur NATURAL JOIN sumarhus
+            GROUP BY stadur;
+
+   </pre>
+   <ul>
+     <li>Viðbót:  ... á árinu 2021
+   <pre>
+        SELECT stadur, count(*)
+            FROM leigur NATURAL JOIN sumarhus
+            WHERE dags LIKE '2021%'
+            GROUP BY stadur;
+
+   </pre>
+   </ul>
+  <li> Fyrir hvern bústað sýnið nöfn þeirra félagsmanna sem hafa fengið hann leigðan í vikuleigu
+   <pre>
+        SELECT husnr, nafn, dags
+            FROM felagar NATURAL JOIN leigur
+            WHERE fj_daga = 7
+            ORDER BY husnr;
+
+   </pre>
+</ul>
+
+<hr>
+<b>Æfingar um undirfyrirspurnir með einni útkomu:</b>
+<ul>
+  <li> Sýnið nafnið á sumarhúsinu með mestan fjölda rúma
+    <pre>
+        SELECT stadur FROM sumarhus
+            WHERE fj_ruma = (SELECT max(fj_ruma) FROM sumarhus);
+
+    </pre>
+  <li> Sýnið öll sumarhús sem eru minni en Reykir
+   <pre>
+        SELECT * FROM sumarhus
+            WHERE fermetrar < (SELECT fermetrar FROM sumarhus
+                                   WHERE stadur = 'Reykir');
+
+   </pre>
+  <li> Sýnið alla félagsmenn sem búa í öðru póstnúmeri en Bjarni
+   <pre>
+        SELECT * FROM felagar
+            WHERE postnr <> (SELECT postnr FROM felagar
+                                   WHERE nafn = 'Bjarni');
+
+   </pre>
+  <li> Sýnið þá félagsmenn sem hafa leigt oftar en Erla
+   <pre>
+        SELECT nafn, count(*) FROM felagar NATURAL JOIN leigur
+            GROUP BY fnr, nafn
+            HAVING count(*) > (SELECT count(*) FROM felagar NATURAL JOIN leigur
+                                   WHERE nafn = 'Erla');
+
+   </pre>
+</ul>
+
+<hr>
+<b>Æfingar um undirfyrirspurnir með útkomu sem er mengi:</b>
+<ul>
+  <li> Sýnið þá félagsmenn sem aldrei hafa fengið sumarhús á leigu
+   <pre>
+        SELECT * FROM felagar
+            WHERE fnr NOT IN (SELECT fnr from leigur);
+
+   </pre>
+  <li> Sýnið þau sumarhús sem hafa verið leigð sjaldnar en tvisvar
+   <pre>
+        SELECT * FROM sumarhus
+            WHERE 2 &gt; (SELECT count(*) from leigur
+                            WHERE leigur.husnr = sumarhus.husnr);
+
+   </pre>
+  <li> Sýnið þá félagsmenn sem aldrei hafa leigt sér sumarhús með 10 rúmum
+   <pre>
+        SELECT * FROM felagar
+            WHERE fnr NOT IN (SELECT fnr FROM sumarhus NATURAL JOIN leigur
+                                 WHERE fj_ruma = 10);
+
+   </pre>
+</ul>
+
+
+<hr>
+<p>
+<a href="mailto:hh (hja) hi.is">hh (hja) hi.is</a>, 14. febrúar, 2022.
+</body>
+
+</html>
