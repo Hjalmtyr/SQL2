@@ -1,18 +1,18 @@
 ---------------------------------------------------------------------------
---  Skipanaskrá til ağ búa til töflur fyrir Endurmenntunarnámskeiğ
---      í SQL
+--  SkipanaskrÃ¡ til aÃ° bÃºa til tÃ¶flur fyrir EndurmenntunarnÃ¡mskeiÃ°
+--      Ã­ SQL
 --
---  Hjálmtır Hafsteinsson, febrúar 2022.
+--  HjÃ¡lmtÃ½r Hafsteinsson, febrÃºar 2022.
 ---------------------------------------------------------------------------
 
--- Henda út gömlum útgáfum af töflum
+-- Henda Ãºt gÃ¶mlum ÃºtgÃ¡fum af tÃ¶flum
 
 drop table if exists felagar;
 drop table if exists leigur;
 drop table if exists sumarhus;
 
 
--- Búa til töflurnar
+-- BÃºa til tÃ¶flurnar
 
 create table felagar(
         fnr integer,
@@ -34,7 +34,7 @@ create table leigur(
         fj_daga integer);
 
 
--- Setja inn sınisgögn
+-- Setja inn sÃ½nisgÃ¶gn
 
 insert into felagar (fnr, nafn, postnr, stig, inng_ar)
         values (48, 'Gunnar', 107, 450, 2017);
