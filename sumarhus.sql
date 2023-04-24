@@ -2,7 +2,7 @@
 --  Skipanaskrá til að búa til töflur fyrir Endurmenntunarnámskeið
 --      í SQL
 --
---  Hjálmtýr Hafsteinsson, nóvember 2022.
+--  Hjálmtýr Hafsteinsson, apríl 2023.
 ---------------------------------------------------------------------------
 
 -- Henda út gömlum útgáfum af töflum
