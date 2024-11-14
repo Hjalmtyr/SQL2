@@ -2,7 +2,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-<title> SQL fyrirspurnarmálið, heimaæfingar </title>
+<title> SQL fyrirspurnarmálið, lausnir á heimaæfingum </title>
 </head>
 
 <body>
@@ -13,14 +13,14 @@ SQL fyrirspurnarmálið
 </h1>
 
 <h1 align="center">
-Heimaæfingar
+Heimaæfingar, lausnir
 </h1>
 
 <br><br>
 <hr>
 
 Gagnasafnið <a href="movies.db">movies.db</a> er skilgreint í skipanaskránni <a href="movies.sql">movies.sql</a>.  Þar er
-skilgreint gagnasafn og gögn fyrir gamla útgáfu af <a href="http://www.imdb.com/interfaces">The Internet Movie Database (IMDB)</a>.
+skilgreint gagnasafn og gögn fyrir gamla útgáfu af <a href="http://www.imdb.com/">The Internet Movie Database (IMDB)</a>.
 Gagnasafnið inniheldur þrjár töflur:
 <ul>
   <li> <tt>actor( id, name )</tt>
@@ -34,30 +34,69 @@ auðkenni leikara og kvikmynda ásamt röð leikarans í myndinni (<tt>ord</tt>)
 er í myndinni (aðalleikarinn er með <tt>ord</tt> = 1, o.s.frv.).
 <p>
 
-Þið eigið að útfæra eftirfarandi fyrirspurnir í SQL og keyra þær á gagnasafninu.  Þið getið sent mér lausnir ykkar
-(bara fyrirspurnirnar sjálfar) á <a href="mailto:hh@hi.is">hh@hi.is</a> fyrir tímann á fimmtudag.
+Þið eigið að útfæra eftirfarandi fyrirspurnir í SQL og keyra þær á gagnasafninu.  Lausn hvers dæmis kemur á eftir því.
 <ol>
 
   <li> Sýnið nöfn þeirra 10 kvikmynda sem hafa lægstu einkunnirnar.
+    <pre>
+          select title, score from movie
+              order by score
+              limit 10;
+    </pre>
+
 
   <li> Sýnið meðaleinkunn kvikmynda eftir ári.
+    <pre>
+          select year, avg(score) from movie
+              group by year;
+    </pre>
 
   <li> Sýnið meðaleinkunn kvikmynda hvers leikara.  Sýnið nafn leikara og meðaleinkunnina í lækkandi röð eftir einkunn.
+    <pre>
+          select name, avg(score)
+              from actor join casting on actor.id = actorid
+                         join movie on movieid = movie.id
+              group by actor.id, name
+              order by avg(score) desc;
+    </pre>
 
   <li> Sýnið nöfn þeirra leikara sem léku í kvikmyndinni "Predator" í röð eftir mikilvægi þeirra (þ.e. eftir <tt>ord</tt>).
+    <pre>
+          select name, ord
+              from actor join casting on actor.id = actorid
+                         join movie on movieid = movie.id
+              where title = 'Predator'
+              order by ord;
+    </pre>
 
   <li> Fyrir hvern leikara sýnið fjölda kvikmynda sem hann hefur leikið í.  Sýnið listann í lækkandi röð eftir fjölda og
        sýnið aðeins 10 efstu.
+    <pre>
+          select name, count(*)
+              from actor join casting on actor.id = actorid
+              group by actor.id, name
+              order by count(*) desc
+              limit 10;
+    </pre>
 
   <li> Sýnið nöfn allra þeirra leikara sem Francis Ford Coppola hefur leikstýrt í kvikmynd ásamt nafni kvikmyndarinnar
        fyrir hvern leikara.<br>
        <font size="-1">Vísbending:  Notið undirfyrirspurn til að finna númerið hjá Francis Ford Coppola</font>
+    <pre>
+          select name, title
+              from actor join casting on actor.id = actorid
+                         join movie on movieid = movie.id
+              where movie.director = (select id from actor
+                                        where name = 'Francis Ford Coppola')
+              order by name;
+
+    </pre>
 
 </ol>
 
 <hr>
 <p>
-<a href="mailto:hh (hja) hi.is">hh (hja) hi.is</a>, 7. nóvember, 2024.
+<a href="mailto:hh (hja) hi.is">hh (hja) hi.is</a>, 14. nóvember, 2024.
 </body>
 
 </html>
